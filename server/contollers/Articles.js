@@ -29,22 +29,31 @@ const Articles = {
       .catch(error => setImmediate(() => messageResponse(response, 500, {
         message: error.stack
       })));
-  }, 
+  },
   /**
-  * It gets all the top x articles on buzzfeed
+  * It gets all the top x articles on buzzfeed and can be filtered
   * @param {Object} request - request object containing params and body
   * @param {Object} response - response object that conveys the result of the request
   * @returns {Object} - response object that has a status code of 200 and 404 error if no
   * articles are found.
   */
   getTopArticles: (request, response) => {
-    const { topLimit } = request.params;
-    pool.query('SELECT * FROM ARTICLES ORDER BY VIEWS DESC LIMIT $1;', [topLimit])
+    const { topLimit, hasQuery } = request.params;
+    let valueArray = [topLimit];
+    let where = '';
+    let sectionPhrase = '';
+    if (hasQuery) {
+      const { section } = request.query;
+      where = 'where section = $2';
+      valueArray = [topLimit, section];
+      sectionPhrase = `for the ${section} section`;
+    }
+    pool.query(`SELECT * FROM ARTICLES ${where} ORDER BY VIEWS DESC LIMIT $1;`, valueArray)
       .then((result) => {
         if (result.rows.length > 0) {
           const pluSig = pluralSingular(result.rows.length, 'article');
           return messageResponse(response, 200, {
-            message: `The top ${result.rows.length} ${pluSig} found`,
+            message: `The top ${result.rows.length} ${pluSig} found ${sectionPhrase}`,
             articles: result.rows
           });
         }
