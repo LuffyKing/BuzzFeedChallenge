@@ -1,0 +1,65 @@
+{
+  "name": "buzzfeedchallenge",
+  "version": "1.0.0",
+  "description": "An api that allows users to search for BuzzFeed's content based on the number of views an article has,the section category, title, and description",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean-dist && npm run build-babel",
+    "start": "npm run build && node build/server/server.js",
+    "startDev": "npm run build && nodemon build/server/server.js",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "build-babel": "./node_modules/.bin/babel server/ -d build/server",
+    "clean-dist": "rm -rf build && mkdir build",
+    "test": "NODE_ENV=test nyc mocha test/index.js --exit",
+    "setupDB": "npm run createDB && npm run build && SETUP=SETUP node build/server/db",
+    "createDB": "psql -f server/db/setupDB.sql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuffyKing/BuzzFeedChallenge.git"
+  },
+  "nyc": {
+    "require": [
+      "@babel/register"
+    ]
+  },
+  "keywords": [
+    "BuzzFeed",
+    "challenge",
+    "api",
+    "search"
+  ],
+  "author": "Oyindamola Aderinwale",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LuffyKing/BuzzFeedChallenge/issues"
+  },
+  "homepage": "https://github.com/LuffyKing/BuzzFeedChallenge#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "pg": "^7.9.0",
+    "swagger-ui-express": "^4.0.2",
+    "validator": "^10.11.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
+    "babel-polyfill": "^6.26.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "coveralls": "^3.0.3",
+    "dotenv": "^7.0.0",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "mocha": "^6.0.2",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10",
+    "nyc": "^13.3.0"
+  }
+}
