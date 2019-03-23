@@ -13,6 +13,7 @@ describe('getAllArticles API Tests', () => {
       chai.request(server)
         .get('/api/v1/getAllArticles')
         .end((err, responseArticles) => {
+          responseArticles.should.have.status(200);
           responseArticles.body.should.have.property('articles');
           responseArticles.body.articles.should.be.an('array');
           responseArticles.body.articles.should.have.lengthOf(50);

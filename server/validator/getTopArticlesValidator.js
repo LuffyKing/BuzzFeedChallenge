@@ -12,7 +12,7 @@ const getTopArticlesValidator = (request, response, next) => {
     request.params.topLimit = request.params.topLimit.trim();
     next();
   } else {
-    return response.status(400).send({ message: `The value ${request.params.topLimit} is not an integer` });
+    return response.status(422).send({ message: `The value ${request.params.topLimit} is not an integer` });
   }
 };
 export default getTopArticlesValidator;
