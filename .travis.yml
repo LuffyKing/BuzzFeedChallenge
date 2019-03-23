@@ -1,6 +1,6 @@
 language: node_js
 env:
-  - DB_TEST_DATABASE_URL=postgres://damola:damola@localhost:5432/ArticleDB
+  - DB_TEST_DATABASE_URL=postgres://damola:damola@localhost:5432/ArticleDB SETUP=SETUP
 node_js:
   - "stable"
 before_install:
