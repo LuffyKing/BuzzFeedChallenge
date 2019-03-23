@@ -4,9 +4,9 @@ import server from '../../server/server';
 
 chai.should();
 chai.use(chaiHttp);
-describe('Article API Tests', () => {
+describe('getAllArticles API Tests', () => {
   /**
-   * Testing get request on the Requests API -success case
+   * Testing get request on the getAllRequests API -success case
    */
   describe('/GET all articles', () => {
     it('should GET all articles on the application', (done) => {

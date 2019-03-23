@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/LuffyKing/BuzzFeedChallenge.svg?branch=develop)](https://travis-ci.org/LuffyKing/BuzzFeedChallenge)
-[![Coverage Status](https://coveralls.io/repos/github/LuffyKing/BuzzFeedChallenge/badge.svg?branch=master)](https://coveralls.io/github/LuffyKing/BuzzFeedChallenge?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/LuffyKing/BuzzFeedChallenge/badge.svg?branch=develop)](https://coveralls.io/github/LuffyKing/BuzzFeedChallenge?branch=develop)
 # Table Of Contents
   - [Maintenance-Tracker-App](#BuzzFeedChallenge)
   - [Prerequisites](#prerequisites)
