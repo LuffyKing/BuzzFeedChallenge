@@ -63,11 +63,19 @@ const Articles = {
   * articles are found.
   */
   getRandomArticle: (request, response) => {
-    const valueArray = [];
-    const sectionPhrase = '';
+    const { hasQuery } = request.params;
+    let valueArray = [];
+    let where = '';
+    let sectionPhrase = '';
+    if (hasQuery) {
+      const { section } = request.query;
+      where = 'where section = $1';
+      valueArray = [section];
+      sectionPhrase = `for the ${section} section`;
+    }
     queryHelper(
       response,
-      'SELECT * FROM ARTICLES ORDER BY RANDOM() LIMIT 1;',
+      `SELECT * FROM ARTICLES ${where} ORDER BY RANDOM() LIMIT 1;`,
       valueArray,
       '',
       sectionPhrase,
