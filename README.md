@@ -14,7 +14,8 @@
   - [License](#license)
 
 ## BuzzFeedChallenge
-This exciting new project aims to create a new web API called BuzzFeedChallenge. BuzzFeedChallenge API provides an api for users to easily browse BuzzFeed's content and search fro interesting articles to keep them abrest of what is goin on in the world.
+This exciting new project aims to create a new web API called BuzzFeedChallenge. BuzzFeedChallenge API provides an api for users to easily browse and explore
+ BuzzFeed's interesting articles to keep them abreast of what is going on in the world.
 
 ## Prerequisites
 ```
