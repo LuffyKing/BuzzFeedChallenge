@@ -10,7 +10,7 @@ router.get('/', (request, response) => messageResponse(response, 200, {
   message: "Welcome to BuzzFeed's Challenge API! Read the docs at /api-docs/ to get started"
 }));
 
-router.get('/getAllArticles', Articles.getAllArticles);
+router.get('/getAllArticles', sectionValidator, Articles.getAllArticles);
 
 router.get('/getTopArticles/:topLimit', getTopArticlesValidator, sectionValidator, Articles.getTopArticles);
 

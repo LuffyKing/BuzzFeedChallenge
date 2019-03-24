@@ -1,6 +1,4 @@
-import pool from '../db/index';
-import messageResponse from '../helperFunctions/messageResponse';
-import pluralSingular from '../helperFunctions/pluralSingluar';
+import queryHelper from '../helperFunctions/queryHelper';
 /**
  * An  object that handles Articles api requests
  */
@@ -13,22 +11,23 @@ const Articles = {
   * articles are found.
   */
   getAllArticles: (request, response) => {
-    pool.query('SELECT * FROM ARTICLES;', [])
-      .then((result) => {
-        if (result.rows.length > 0) {
-          const pluSig = pluralSingular(result.rows.length, 'article');
-          return messageResponse(response, 200, {
-            message: `${result.rows.length} ${pluSig} found`,
-            articles: result.rows
-          });
-        }
-        return messageResponse(response, 404, {
-          message: 'No Articles were found'
-        });
-      })
-      .catch(error => setImmediate(() => messageResponse(response, 500, {
-        message: error.stack
-      })));
+    const { hasQuery } = request.params;
+    let valueArray = [];
+    let where = '';
+    let sectionPhrase = '';
+    if (hasQuery) {
+      const { section } = request.query;
+      where = 'where section = $1';
+      valueArray = [section];
+      sectionPhrase = `for the ${section} section`;
+    }
+    queryHelper(
+      response,
+      `SELECT * FROM ARTICLES ${where};`,
+      valueArray,
+      '',
+      sectionPhrase
+    );
   },
   /**
   * It gets all the top x articles on buzzfeed and can be filtered
@@ -48,22 +47,13 @@ const Articles = {
       valueArray = [topLimit, section];
       sectionPhrase = `for the ${section} section`;
     }
-    pool.query(`SELECT * FROM ARTICLES ${where} ORDER BY VIEWS DESC LIMIT $1;`, valueArray)
-      .then((result) => {
-        if (result.rows.length > 0) {
-          const pluSig = pluralSingular(result.rows.length, 'article');
-          return messageResponse(response, 200, {
-            message: `The top ${result.rows.length} ${pluSig} found ${sectionPhrase}`,
-            articles: result.rows
-          });
-        }
-        return messageResponse(response, 404, {
-          message: 'No Articles were found'
-        });
-      })
-      .catch(error => setImmediate(() => messageResponse(response, 500, {
-        message: error.stack
-      })));
+    queryHelper(
+      response,
+      `SELECT * FROM ARTICLES ${where} ORDER BY VIEWS DESC LIMIT $1;`,
+      valueArray,
+      'The top',
+      sectionPhrase
+    );
   }
 };
 
