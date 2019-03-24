@@ -12,7 +12,7 @@ router.get('/', (request, response) => messageResponse(response, 200, {
 
 router.get('/getAllArticles', sectionValidator, Articles.getAllArticles);
 
-router.get('/getRandomArticle', Articles.getRandomArticle);
+router.get('/getRandomArticle', sectionValidator, Articles.getRandomArticle);
 
 router.get('/getTopArticles/:topLimit', getTopArticlesValidator, sectionValidator, Articles.getTopArticles);
 
