@@ -1,7 +1,7 @@
 {
   "name": "buzzfeedchallenge",
   "version": "1.0.0",
-  "description": "An api that allows users to search for BuzzFeed's content based on the number of views an article has,the section category, title, and description",
+  "description": "An api that allows users to explore BuzzFeed's content based on the number of views an article has,the section category, title, and description",
   "main": "index.js",
   "scripts": {
     "build": "npm run clean-dist && npm run build-babel",

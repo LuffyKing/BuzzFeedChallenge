@@ -54,6 +54,26 @@ const Articles = {
       'The top',
       sectionPhrase
     );
+  },
+  /**
+  * It gets a random article from buzzfeed
+  * @param {Object} request - request object containing params and body
+  * @param {Object} response - response object that conveys the result of the request
+  * @returns {Object} - response object that has a status code of 200 and 404 error if no
+  * articles are found.
+  */
+  getRandomArticle: (request, response) => {
+    const valueArray = [];
+    const sectionPhrase = '';
+    queryHelper(
+      response,
+      'SELECT * FROM ARTICLES ORDER BY RANDOM() LIMIT 1;',
+      valueArray,
+      '',
+      sectionPhrase,
+      'Article',
+      'get single article'
+    );
   }
 };
 
